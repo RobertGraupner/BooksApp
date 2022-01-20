@@ -68,9 +68,8 @@ class Bookslist {
       //console.log(thisBook.favoriteBooks);
     });
 
-    const form = document.querySelector('.filters');
 
-    form.addEventListener('change', function (event) {
+    thisBook.form.addEventListener('change', function (event) {
       event.preventDefault();
       if (
         event.target.tagName === 'INPUT' &&
