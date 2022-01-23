@@ -1,8 +1,23 @@
-const templates = {
-  bookTemplate: Handlebars.compile(document.querySelector('#template-book').innerHTML),
+const select = {
+  templateOf: {
+    book: '#template-book',
+  },
+  listOf: {
+    bookList: '.books-list',
+  },
+  filterBook: {
+    filter: '.filters',
+  },
+  imageOf: {
+    image: '.book__image',
+  },
 };
 
-class Bookslist {
+const templates = {
+  bookTemplate: Handlebars.compile(document.querySelector(select.templateOf.book).innerHTML),
+};
+
+class BooksList {
   constructor() {
     const thisBook = this;
     thisBook.initData();
@@ -18,8 +33,8 @@ class Bookslist {
   getElements() {
     const thisBook = this;
 
-    thisBook.bookList = document.querySelector('.books-list');
-    thisBook.form = document.querySelector('.filters');
+    thisBook.bookList = document.querySelector(select.listOf.bookList);
+    thisBook.form = document.querySelector(select.filterBook.filter);
     thisBook.favoriteBooks = [];
     thisBook.filters = [];
   }
@@ -44,7 +59,7 @@ class Bookslist {
       /* zamiana html na element DOM */
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       /* add element to DOM */
-      const listClass = document.querySelector('.books-list');
+      const listClass = document.querySelector(select.listOf.bookList);
       listClass.appendChild(generatedDOM);
     }
   }
@@ -98,9 +113,9 @@ class Bookslist {
         }
       }
       if (shouldBeHidden) {
-        document.querySelector('.book__image[data-id="' + book.id + '"]').classList.add('hidden');
+        document.querySelector(select.imageOf.image + '[data-id="' + book.id + '"]').classList.add('hidden');
       } else {
-        document.querySelector('.book__image[data-id="' + book.id + '"]').classList.remove('hidden');
+        document.querySelector(select.imageOf.image + '[data-id="' + book.id + '"]').classList.remove('hidden');
       }
     }
   }
@@ -121,5 +136,4 @@ class Bookslist {
   }
 }
 
-const app = new Bookslist();
-app; // da sie to obejsc zeby npm run watch puszczal bez pisania tego?:)
+new BooksList();
